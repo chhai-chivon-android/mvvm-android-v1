@@ -28,12 +28,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         final DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close);
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
+
+        toolbar.setTitle("Home");
+        HomeFragment homeFragment = new HomeFragment();
+        Utility.displayFragment(homeFragment, getSupportFragmentManager(), R.id.lyt_fragment_container);
 
         NavigationView navigationView = findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -41,23 +46,24 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 drawerLayout.closeDrawers();
                 if (menuItem.getItemId() == R.id.mnu_home) {
-                    //getSupportActionBar().setTitle("Home");
+                    toolbar.setTitle("Home");
                     HomeFragment homeFragment = new HomeFragment();
                     Utility.displayFragment(homeFragment, getSupportFragmentManager(), R.id.lyt_fragment_container);
                 } else if (menuItem.getItemId() == R.id.mnu_user) {
-                    //getSupportActionBar().setTitle("User");
+                    getSupportActionBar().setTitle("User");
+                    toolbar.setTitle("User");
                     UserFragment userFragment = new UserFragment();
                     Utility.displayFragment(userFragment, getSupportFragmentManager(), R.id.lyt_fragment_container);
                 } else if(menuItem.getItemId() == R.id.mnu_photo) {
-                    //getSupportActionBar().setTitle("Photo");
+                    toolbar.setTitle("Photo");
                     PhotoFragment photoFragment = new PhotoFragment();
                     Utility.displayFragment(photoFragment, getSupportFragmentManager(), R.id.lyt_fragment_container);
                 }else if(menuItem.getItemId() == R.id.mnu_post) {
-                    //getSupportActionBar().setTitle("Photo");
+                    toolbar.setTitle("Post");
                     PhotoFragment photoFragment = new PhotoFragment();
                     Utility.displayFragment(photoFragment, getSupportFragmentManager(), R.id.lyt_fragment_container);
                 }else if(menuItem.getItemId() == R.id.mnu_todo) {
-                    //getSupportActionBar().setTitle("Photo");
+                    toolbar.setTitle("Todo");
                     PhotoFragment photoFragment = new PhotoFragment();
                     Utility.displayFragment(photoFragment, getSupportFragmentManager(), R.id.lyt_fragment_container);
                 }
