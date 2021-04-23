@@ -53,7 +53,7 @@ public class UserRepository {
             @Override
             public void onFailure(Call<List<User>> call, Throwable t) {
                 t.printStackTrace();
-                data.setValue(null);
+                 data.setValue(null);
             }
         });
         data.setValue(dataSet);

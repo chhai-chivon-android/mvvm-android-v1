@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MVVM1">
-        <activity android:name=".ui.user.UserActivity"></activity>
+        <activity android:name=".ui.user.UserActivity"/>
         <activity android:name=".ui.post.PostActivity" />
         <activity android:name=".ui.todo.TodoActivity" />
         <activity android:name=".ui.photo.PhotoActivity" />
@@ -20,7 +20,6 @@
         <activity android:name=".ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

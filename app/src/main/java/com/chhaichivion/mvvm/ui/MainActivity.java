@@ -1,22 +1,20 @@
 package com.chhaichivion.mvvm.ui;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.os.Bundle;
-import android.view.View;
-import android.widget.ProgressBar;
+import android.view.MenuItem;
+import androidx.appcompat.widget.Toolbar;
 
 import com.chhaichivion.mvvm.R;
-import com.chhaichivion.mvvm.data.remote.response.User;
-import com.chhaichivion.mvvm.ui.adapter.UserAdapter;
-import com.chhaichivion.mvvm.viewmodel.UserViewModel;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.chhaichivion.mvvm.ui.home.HomeFragment;
+import com.chhaichivion.mvvm.ui.photo.PhotoFragment;
+import com.chhaichivion.mvvm.ui.user.UserFragment;
+import com.chhaichivion.mvvm.utility.Utility;
+import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,48 +22,47 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
 
-    private List<User> users = new ArrayList<>();
-    private RecyclerView mRecyclerView;
-    private UserAdapter mAdapter;
-    private ProgressBar mProgressBar;
-    private UserViewModel userViewModel;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mRecyclerView = findViewById(R.id.rvUser);
-        mProgressBar = findViewById(R.id.pbLoading);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        //setSupportActionBar(toolbar);
 
-        userViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
-        userViewModel.init();
-        showProgressBar();
-        userViewModel.getUsersRepository().observe(this, usersResponse -> {
-            users.addAll(usersResponse);
-            mAdapter.notifyDataSetChanged();
+        final DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close);
+        drawerLayout.addDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.syncState();
+
+        NavigationView navigationView = findViewById(R.id.navigation_view);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                drawerLayout.closeDrawers();
+                if (menuItem.getItemId() == R.id.mnu_home) {
+                    //getSupportActionBar().setTitle("Home");
+                    HomeFragment homeFragment = new HomeFragment();
+                    Utility.displayFragment(homeFragment, getSupportFragmentManager(), R.id.lyt_fragment_container);
+                } else if (menuItem.getItemId() == R.id.mnu_user) {
+                    //getSupportActionBar().setTitle("User");
+                    UserFragment userFragment = new UserFragment();
+                    Utility.displayFragment(userFragment, getSupportFragmentManager(), R.id.lyt_fragment_container);
+                } else if(menuItem.getItemId() == R.id.mnu_photo) {
+                    //getSupportActionBar().setTitle("Photo");
+                    PhotoFragment photoFragment = new PhotoFragment();
+                    Utility.displayFragment(photoFragment, getSupportFragmentManager(), R.id.lyt_fragment_container);
+                }else if(menuItem.getItemId() == R.id.mnu_post) {
+                    //getSupportActionBar().setTitle("Photo");
+                    PhotoFragment photoFragment = new PhotoFragment();
+                    Utility.displayFragment(photoFragment, getSupportFragmentManager(), R.id.lyt_fragment_container);
+                }else if(menuItem.getItemId() == R.id.mnu_todo) {
+                    //getSupportActionBar().setTitle("Photo");
+                    PhotoFragment photoFragment = new PhotoFragment();
+                    Utility.displayFragment(photoFragment, getSupportFragmentManager(), R.id.lyt_fragment_container);
+                }
+                return true;
+            }
         });
-        initRecyclerView();
-    }
-
-    private void initRecyclerView() {
-        if (mAdapter == null) {
-            mAdapter = new UserAdapter(MainActivity.this, users);
-            mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-            mRecyclerView.setAdapter(mAdapter);
-            mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-            mRecyclerView.setNestedScrollingEnabled(true);
-        } else {
-            mAdapter.notifyDataSetChanged();
-        }
-        hideProgressBar();
-    }
-
-    private void showProgressBar(){
-        mProgressBar.setVisibility(View.VISIBLE);
-    }
-
-    private void hideProgressBar(){
-        mProgressBar.setVisibility(View.GONE);
     }
 }
