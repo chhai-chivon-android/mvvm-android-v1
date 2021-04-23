@@ -1,4 +1,4 @@
-package com.chhaichivion.mvvm.ui;
+package com.chhaichivion.mvvm.ui.user;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
@@ -13,16 +13,15 @@ import android.widget.ProgressBar;
 import com.chhaichivion.mvvm.R;
 import com.chhaichivion.mvvm.data.remote.response.User;
 import com.chhaichivion.mvvm.ui.adapter.UserAdapter;
+import com.chhaichivion.mvvm.ui.listener.InfiniteScrollListener;
 import com.chhaichivion.mvvm.viewmodel.UserViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class UserActivity extends AppCompatActivity implements InfiniteScrollListener.OnLoadMoreListener{
 
     // https://ayusch.com/android-paginated-recyclerview-with-progress-bar/
-
-    private static final String TAG = "MainActivity";
 
     private List<User> users = new ArrayList<>();
     private RecyclerView mRecyclerView;
@@ -33,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_user);
 
         mRecyclerView = findViewById(R.id.rvUser);
         mProgressBar = findViewById(R.id.pbLoading);
@@ -50,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void initRecyclerView() {
         if (mAdapter == null) {
-            mAdapter = new UserAdapter(MainActivity.this, users);
+            mAdapter = new UserAdapter(UserActivity.this, users);
             mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
             mRecyclerView.setAdapter(mAdapter);
             mRecyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -67,5 +66,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void hideProgressBar(){
         mProgressBar.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onLoadMore() {
+
     }
 }

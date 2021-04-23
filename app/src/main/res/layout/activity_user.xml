@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_gravity="center"
-    tools:context=".ui.MainActivity">
+    tools:context=".ui.user.UserActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvUser"
@@ -20,7 +20,6 @@
         android:id="@+id/pbLoading"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
         tools:layout_editor_absoluteX="16dp"/>
 
 </LinearLayout>
