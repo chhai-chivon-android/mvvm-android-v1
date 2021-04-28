@@ -19,13 +19,14 @@ import android.widget.ProgressBar;
 import com.chhaichivion.mvvm.R;
 import com.chhaichivion.mvvm.data.remote.response.User;
 import com.chhaichivion.mvvm.ui.adapter.UserAdapter;
+import com.chhaichivion.mvvm.ui.listener.OnViewModelListener;
 import com.chhaichivion.mvvm.viewmodel.UserViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class UserFragment extends Fragment {
+public class UserFragment extends Fragment implements OnViewModelListener<User> {
 
     private List<User> users = new ArrayList<>();
     private RecyclerView mRecyclerView;
@@ -80,5 +81,21 @@ public class UserFragment extends Fragment {
 
     private void hideProgressBar(){
         mProgressBar.setVisibility(View.GONE);
+    }
+
+
+    @Override
+    public void onStarted() {
+        showProgressBar();
+    }
+
+    @Override
+    public void onSuccess(User response) {
+
+    }
+
+    @Override
+    public void onFailure(String message) {
+
     }
 }
