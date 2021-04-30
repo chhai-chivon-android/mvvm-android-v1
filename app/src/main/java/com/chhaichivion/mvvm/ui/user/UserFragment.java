@@ -48,7 +48,7 @@ public class UserFragment extends Fragment implements OnViewModelListener<User> 
 
         userViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
         userViewModel.init();
-        showProgressBar();
+        //showProgressBar();
         userViewModel.getUsersRepository().observe(this, usersResponse -> {
             users.addAll(usersResponse);
             mAdapter.notifyDataSetChanged();

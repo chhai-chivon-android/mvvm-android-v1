@@ -14,7 +14,6 @@ import com.bumptech.glide.request.RequestOptions;
 import com.chhaichivion.mvvm.R;
 import com.chhaichivion.mvvm.data.remote.response.User;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -26,7 +25,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  */
 public class UserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>  {
 
-    private List<User> users = new ArrayList<>();
+    private List<User> users;
     private Context mContext;
 
     public UserAdapter(Context context, List<User> users) {
@@ -37,7 +36,7 @@ public class UserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>  
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_listitem, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.user_item_layout, parent, false);
         ViewHolder vh = new ViewHolder(view);
         return vh;
     }
