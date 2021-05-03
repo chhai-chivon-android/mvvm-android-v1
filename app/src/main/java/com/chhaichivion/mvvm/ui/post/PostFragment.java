@@ -44,7 +44,7 @@ public class PostFragment extends Fragment {
         mProgressBar = view.findViewById(R.id.pbLoading);
 
         postViewModel = ViewModelProviders.of(this).get(PostViewModel.class);
-        postViewModel.init();
+        postViewModel.init(getContext());
         //showProgressBar();
         postViewModel.getPostsRepository().observe(this, usersResponse -> {
             posts.addAll(usersResponse);

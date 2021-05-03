@@ -22,12 +22,12 @@ import java.util.List;
  */
 public class UserViewModel extends ViewModel implements OnViewModelListener<User> {
 
-    private MutableLiveData<List<User>> mUserMutableLiveData;
-
     private Context context;
+    private MutableLiveData<List<User>> mUserMutableLiveData;
     private UserRepository mRepo;
 
-    public void init(){
+    public void init(Context context){
+        this.context = context;
         if(mUserMutableLiveData != null){
             return;
         }

@@ -1,5 +1,7 @@
 package com.chhaichivion.mvvm.viewmodel;
 
+import android.content.Context;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -16,10 +18,12 @@ import java.util.List;
  */
 public class TodoViewModel extends ViewModel {
 
+    private Context context;
     private MutableLiveData<List<Todo>> mTodoMutableLiveData;
     private TodoRepository mRepo;
 
-    public void init(){
+    public void init(Context context){
+        this.context = context;
         if(mTodoMutableLiveData != null){
             return;
         }

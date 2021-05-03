@@ -45,10 +45,10 @@ public class TodoFragment extends Fragment {
         mProgressBar = view.findViewById(R.id.pbLoading);
 
         todoViewModel = ViewModelProviders.of(this).get(TodoViewModel.class);
-        todoViewModel.init();
+        todoViewModel.init(getContext());
         //showProgressBar();
-        todoViewModel.getTodosRepository().observe(this, usersResponse -> {
-            todos.addAll(usersResponse);
+        todoViewModel.getTodosRepository().observe(this, todosResponse -> {
+            todos.addAll(todosResponse);
             mAdapter.notifyDataSetChanged();
         });
         initRecyclerView();

@@ -45,7 +45,7 @@ public class PhotoFragment extends Fragment {
         mProgressBar = view.findViewById(R.id.pbLoading);
 
         photoViewModel = ViewModelProviders.of(this).get(PhotoViewModel.class);
-        photoViewModel.init();
+        photoViewModel.init(getContext());
         //showProgressBar();
         photoViewModel.getPhotosRepository().observe(this, usersResponse -> {
             photos.addAll(usersResponse);

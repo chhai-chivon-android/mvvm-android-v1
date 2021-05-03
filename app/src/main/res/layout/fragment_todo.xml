@@ -20,5 +20,4 @@
         android:layout_height="wrap_content"
         tools:layout_editor_absoluteX="16dp" />
 
-
 </LinearLayout>

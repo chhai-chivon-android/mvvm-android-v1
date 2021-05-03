@@ -10,8 +10,11 @@ import android.view.MenuItem;
 import androidx.appcompat.widget.Toolbar;
 
 import com.chhaichivion.mvvm.R;
+import com.chhaichivion.mvvm.data.remote.response.Post;
 import com.chhaichivion.mvvm.ui.home.HomeFragment;
 import com.chhaichivion.mvvm.ui.photo.PhotoFragment;
+import com.chhaichivion.mvvm.ui.post.PostFragment;
+import com.chhaichivion.mvvm.ui.todo.TodoFragment;
 import com.chhaichivion.mvvm.ui.user.UserFragment;
 import com.chhaichivion.mvvm.utility.Utility;
 import com.google.android.material.navigation.NavigationView;
@@ -19,8 +22,6 @@ import com.google.android.material.navigation.NavigationView;
 public class MainActivity extends AppCompatActivity {
 
     // https://ayusch.com/android-paginated-recyclerview-with-progress-bar/
-
-    private static final String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
                     HomeFragment homeFragment = new HomeFragment();
                     Utility.displayFragment(homeFragment, getSupportFragmentManager(), R.id.lyt_fragment_container);
                 } else if (menuItem.getItemId() == R.id.mnu_user) {
-                    getSupportActionBar().setTitle("User");
                     toolbar.setTitle("User");
                     UserFragment userFragment = new UserFragment();
                     Utility.displayFragment(userFragment, getSupportFragmentManager(), R.id.lyt_fragment_container);
@@ -60,12 +60,12 @@ public class MainActivity extends AppCompatActivity {
                     Utility.displayFragment(photoFragment, getSupportFragmentManager(), R.id.lyt_fragment_container);
                 }else if(menuItem.getItemId() == R.id.mnu_post) {
                     toolbar.setTitle("Post");
-                    PhotoFragment photoFragment = new PhotoFragment();
-                    Utility.displayFragment(photoFragment, getSupportFragmentManager(), R.id.lyt_fragment_container);
+                    PostFragment postFragment = new PostFragment();
+                    Utility.displayFragment(postFragment, getSupportFragmentManager(), R.id.lyt_fragment_container);
                 }else if(menuItem.getItemId() == R.id.mnu_todo) {
                     toolbar.setTitle("Todo");
-                    PhotoFragment photoFragment = new PhotoFragment();
-                    Utility.displayFragment(photoFragment, getSupportFragmentManager(), R.id.lyt_fragment_container);
+                    TodoFragment todoFragment = new TodoFragment();
+                    Utility.displayFragment(todoFragment, getSupportFragmentManager(), R.id.lyt_fragment_container);
                 }
                 return true;
             }
