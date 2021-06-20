@@ -1,10 +1,12 @@
 package com.chhaichivion.mvvm.data.repository;
 
+import android.content.Context;
 import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
 
 import com.chhaichivion.mvvm.data.remote.network.ApiService;
+import com.chhaichivion.mvvm.data.remote.network.PhotoApi;
 import com.chhaichivion.mvvm.data.remote.network.PostApi;
 import com.chhaichivion.mvvm.data.remote.network.TodoApi;
 import com.chhaichivion.mvvm.data.remote.response.Post;
@@ -28,16 +30,18 @@ public class PostRepository {
     private static PostRepository instance;
     private ArrayList<Post> dataSet = new ArrayList<>();
     private PostApi postApi;
+    private Context context;
 
-    public static PostRepository getInstance(){
+    public static PostRepository getInstance(Context context){
+        context = context;
         if(instance == null){
-            instance = new PostRepository();
+            instance = new PostRepository(context);
         }
         return instance;
     }
 
-    public PostRepository(){
-        postApi = ApiService.createService(PostApi.class);
+    public PostRepository(Context context){
+        postApi = ApiService.getInstance(context).create(PostApi.class);
     }
 
     public MutableLiveData<List<Post>> getPosts(){

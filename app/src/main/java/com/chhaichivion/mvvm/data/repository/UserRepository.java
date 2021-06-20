@@ -1,10 +1,12 @@
 package com.chhaichivion.mvvm.data.repository;
 
+import android.content.Context;
 import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
 
 import com.chhaichivion.mvvm.data.remote.network.ApiService;
+import com.chhaichivion.mvvm.data.remote.network.TodoApi;
 import com.chhaichivion.mvvm.data.remote.network.UserApi;
 import com.chhaichivion.mvvm.data.remote.response.User;
 import com.google.gson.Gson;
@@ -26,16 +28,18 @@ public class UserRepository {
     private static UserRepository instance;
     private ArrayList<User> dataSet = new ArrayList<>();
     private UserApi userApi;
+    private Context context;
 
-    public static UserRepository getInstance(){
+    public static UserRepository getInstance(Context context){
+        context = context;
         if(instance == null){
-            instance = new UserRepository();
+            instance = new UserRepository(context);
         }
         return instance;
     }
 
-    public UserRepository(){
-        userApi = ApiService.createService(UserApi.class);
+    public UserRepository(Context context){
+        userApi = ApiService.getInstance(context).create(UserApi.class);
     }
 
     public MutableLiveData<List<User>> getUsers(){

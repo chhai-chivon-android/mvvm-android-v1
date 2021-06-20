@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.widget.Button;
 
 import com.chhaichivion.mvvm.R;
+import com.chhaichivion.mvvm.ui.login.LoginActivity;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -17,7 +18,7 @@ public class SplashActivity extends AppCompatActivity {
 
         Button buttonStart = findViewById(R.id.btnStart);
         buttonStart.setOnClickListener(view -> {
-            Intent intent = new Intent(this,MainActivity.class);
+            Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
         });
     }

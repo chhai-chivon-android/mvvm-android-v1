@@ -27,7 +27,7 @@ public class TodoViewModel extends ViewModel {
         if(mTodoMutableLiveData != null){
             return;
         }
-        mRepo = TodoRepository.getInstance();
+        mRepo = TodoRepository.getInstance(context);
         mTodoMutableLiveData = mRepo.getTodos();
     }
 

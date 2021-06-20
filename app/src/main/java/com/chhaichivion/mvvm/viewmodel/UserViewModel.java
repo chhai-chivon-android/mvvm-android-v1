@@ -31,7 +31,7 @@ public class UserViewModel extends ViewModel implements OnViewModelListener<User
         if(mUserMutableLiveData != null){
             return;
         }
-        mRepo = UserRepository.getInstance();
+        mRepo = UserRepository.getInstance(context);
         mUserMutableLiveData = mRepo.getUsers();
     }
 

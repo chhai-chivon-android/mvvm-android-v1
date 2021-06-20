@@ -1,5 +1,6 @@
 package com.chhaichivion.mvvm.data.repository;
 
+import android.content.Context;
 import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
@@ -26,16 +27,18 @@ public class PhotoRepository {
     private static PhotoRepository instance;
     private ArrayList<Photo> dataSet = new ArrayList<>();
     private PhotoApi photoApi;
+    private Context context;
 
-    public static PhotoRepository getInstance(){
+    public static PhotoRepository getInstance(Context context){
+        context = context;
         if(instance == null){
-            instance = new PhotoRepository();
+            instance = new PhotoRepository(context);
         }
         return instance;
     }
 
-    public PhotoRepository(){
-        photoApi = ApiService.createService(PhotoApi.class);
+    public PhotoRepository(Context context){
+        photoApi = ApiService.getInstance(context).create(PhotoApi.class);
     }
 
     public MutableLiveData<List<Photo>> getPhotos(){

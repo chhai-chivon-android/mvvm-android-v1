@@ -27,7 +27,7 @@ public class PostViewModel extends ViewModel {
         if(mPostMutableLiveData != null){
             return;
         }
-        mRepo = PostRepository.getInstance();
+        mRepo = PostRepository.getInstance(context);
         mPostMutableLiveData = mRepo.getPosts();
     }
 

@@ -1,10 +1,12 @@
 package com.chhaichivion.mvvm.data.repository;
 
+import android.content.Context;
 import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
 
 import com.chhaichivion.mvvm.data.remote.network.ApiService;
+import com.chhaichivion.mvvm.data.remote.network.PostApi;
 import com.chhaichivion.mvvm.data.remote.network.TodoApi;
 import com.chhaichivion.mvvm.data.remote.response.Todo;
 import com.chhaichivion.mvvm.data.remote.response.User;
@@ -27,16 +29,18 @@ public class TodoRepository {
     private static TodoRepository instance;
     private ArrayList<Todo> dataSet = new ArrayList<>();
     private TodoApi todoApi;
+    private Context context;
 
-    public static TodoRepository getInstance(){
+    public static TodoRepository getInstance(Context context){
+        context = context;
         if(instance == null){
-            instance = new TodoRepository();
+            instance = new TodoRepository(context);
         }
         return instance;
     }
 
-    public TodoRepository(){
-        todoApi = ApiService.createService(TodoApi.class);
+    public TodoRepository(Context context){
+        todoApi = ApiService.getInstance(context).create(TodoApi.class);
     }
 
     public MutableLiveData<List<Todo>> getTodos(){

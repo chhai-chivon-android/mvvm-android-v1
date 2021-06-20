@@ -27,7 +27,7 @@ public class PhotoViewModel extends ViewModel {
         if(mPhotoMutableLiveData != null){
             return;
         }
-        mRepo = PhotoRepository.getInstance();
+        mRepo = PhotoRepository.getInstance(context);
         mPhotoMutableLiveData = mRepo.getPhotos();
     }
 
